@@ -1,0 +1,7 @@
+{
+  "appURL": "https://automationteststore.com/",
+  "username": "",
+  "password": "",
+  "browserName": "chrome",
+  "isBrowserModeHeadless": false
+}
