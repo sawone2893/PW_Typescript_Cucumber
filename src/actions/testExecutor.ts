@@ -14,10 +14,10 @@ export class TestExecutor {
                 await global.actionDriver.enterTextOnElement(testStep.locator, testStep.value);
                 break;
             case 'WaitUntillElementDisappear':
-                await global.actionDriver.waitUntillElementDisappear(testStep.locator, testStep.value);
+                await global.actionDriver.waitUntillElementDisappear(testStep.locator,110);
                 break;
             case 'WaitUntillElementAppear':
-                await global.actionDriver.waitUntillElementAppear(testStep.locator, testStep.value);
+                await global.actionDriver.waitUntillElementAppear(testStep.locator,110);
                 break;
             case 'VerifyPageTitle':
                 const pageTitle = await global.actionDriver.getPageTitle();

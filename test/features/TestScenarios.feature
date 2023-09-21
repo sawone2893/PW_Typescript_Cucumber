@@ -1,8 +1,7 @@
 Feature: Testing Application
     @Test
     Scenario Outline: User Register on the website
-    Given I "WaitForPageLoadState" "networkidle"
-    Then I "WaitForElement" "5" seconds
+    Given I "WaitUntillElementAppear" on "TagWithText" with values "a,Login or register"
     When I "Click" on "TagWithText" with values "a,Login or register"
     And I "Click" on "TagWithAttribute" with values "input,value,register"
     And I "Click" on "ButtonWithText" with values "Continue"
@@ -30,8 +29,7 @@ Feature: Testing Application
 
     @Test
     Scenario Outline: Verify user is able to place order
-    Given I "WaitForPageLoadState" "networkidle"
-    Then I "WaitForElement" "5" seconds
+    Given I "WaitUntillElementAppear" on "TagWithText" with values "a,Login or register"
     When I "Click" on "TagWithText" with values "a,Login or register"
     And I "EnterValue" "<loginname>" for "TagWithAttribute" with values "input,name,loginname"
     And I "EnterValue" "<password>" for "TagWithAttribute" with values "input,name,password"

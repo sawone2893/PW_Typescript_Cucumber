@@ -19,9 +19,10 @@ When('I {string} {string} for {string} with values {string}',async (action:strin
 
 /*Example:
  * Then I "Click" on "Button" with values "Login"
+   Then I "WaitUntillElementDisappear" on "Button" with values "Login"
+   Then I "WaitUntillElementAppear" on "Button" with values "Login"
  */
 When('I {string} on {string} with values {string}',async (action:string,locatorIdentifier:string,param:string)=>{
-    console.log(`Type of getLocator: ${typeof await testExecutor.getLocator(locatorIdentifier,param)}`);
     testExecutor.executeAction({action:action,locator:await testExecutor.getLocator(locatorIdentifier,param)});
 });
 
@@ -52,4 +53,5 @@ Then('I {string} {string}',(action:string,value:string)=>{
 Then('I {string} {string} seconds',(action:string,value:string)=>{
     testExecutor.executeAction({action:action,value:value});
 });
+
 

@@ -1,5 +1,5 @@
 
-import {Page,BrowserContext,Browser, chromium, Locator} from 'playwright';
+import {Page,BrowserContext,Browser, chromium} from '@playwright/test';
 import path from 'path';
 
 export class WebActions{
@@ -10,9 +10,9 @@ export class WebActions{
     async initializesBrowser(browserName: string, isHeadless: boolean): Promise<void> {
         this.browser=await chromium.launch({headless:isHeadless,slowMo:1000,channel:browserName});
         this.browserContext=await this.browser.newContext({ignoreHTTPSErrors:true,acceptDownloads:true});
-        this.page=await this.browserContext.newPage();
-        this.browserContext.setDefaultTimeout(300000);
-        this.browserContext.setDefaultNavigationTimeout(300000);
+        //this.browserContext.setDefaultNavigationTimeout(110000);
+        this.browserContext.setDefaultTimeout(110000);
+        this.page=await this.browserContext.newPage();   
     }
 
     async closePage(): Promise<void>{
@@ -22,7 +22,7 @@ export class WebActions{
         await this.browserContext.close();  
      }
      async openURL(url: string){
-       await this.page.goto(url);
+       await this.page.goto(url,{ waitUntil: "load", timeout: 30000 });
     }
     async refresh(): Promise<void> {
         await this.page.reload();
@@ -42,25 +42,56 @@ export class WebActions{
           }
     }
     async waitUntillElementDisappear(locator:any, timeInSeconds: number): Promise<void> {
+        
         try {
-            await this.page.waitForSelector(locator, { state: 'hidden',timeout:timeInSeconds*1000 });
+            const startTime=Date.now();
+            while(await this.isElementDisplayed(locator)){
+                console.log(`Waiting for Element[${locator}] to be disappear...`);
+                await this.waitForPageLoadState("networkidle");
+                await this.waitForPageLoadState("load");
+                await this.waitForPageLoadState("domcontentloaded");
+                await this.waitForElement(1);
+                const endTime=Date.now();
+                if((endTime-startTime)>timeInSeconds*1000){
+                    break;
+                }
+            } 
           } catch (error) {
-            console.error('Element is not disappear within the specified timeout.');
+            console.error(`Element:: ${locator} is not disappear within the specified timeout.`);
           }
         
     }
     async waitUntillElementAppear(locator:any, timeInSeconds: number): Promise<any> {
         try {
-            await this.page.waitForSelector(locator, { state: 'visible',timeout:timeInSeconds*1000 });
+            const startTime=Date.now();
+            while(!await this.isElementDisplayed(locator)){
+                console.log(`Waiting for Element[${locator}] to be appear...`);
+                await this.waitForPageLoadState("networkidle");
+                await this.waitForPageLoadState("load");
+                await this.waitForPageLoadState("domcontentloaded");
+                await this.waitForElement(1);
+                const endTime=Date.now();
+                if((endTime-startTime)>timeInSeconds*1000){
+                    break;
+                }
+            }
           } catch (error) {
-            console.error('Element is not appear within the specified timeout.');
+            console.error(`Element:: ${locator} is not appear within the specified timeout.`);
           }
     }
     async waitForElement(timeInSeconds: number): Promise<void> {
         await this.page.waitForTimeout(timeInSeconds*1000)
     }
-    async isElementDisplayed(locator:any): Promise<any>{
-       return await this.page.isVisible(locator);
+    async isElementDisplayed(locator: any): Promise<any> {
+        try {
+            if (await this.page.isVisible(locator)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (e) {
+            return false;
+        }
     }
     async isElementEnabled(locator:any): Promise<any>{
         return await this.page.isEnabled(locator);
