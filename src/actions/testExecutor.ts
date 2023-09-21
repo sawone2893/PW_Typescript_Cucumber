@@ -7,7 +7,6 @@ export class TestExecutor {
 
     async executeAction(testStep) {
         switch (testStep.action) {
-
             case 'Click':
                 await global.actionDriver.clickElement(testStep.locator);
                 break;
@@ -43,7 +42,7 @@ export class TestExecutor {
                 console.log(`${testStep.action} is not defined.Please define your action in the TestExecutor Class.`)
         }
     }
-    async getLocator(locatorIdentifier: string, parameters?: string):Promise<string> {
+    async getLocator(locatorIdentifier: string, parameters?: string){
         let locatorGenerator = LocatorConstants[locatorIdentifier];
         let locatorVariable = locatorGenerator.split('.');
         if (parameters) {
@@ -64,7 +63,6 @@ export class TestExecutor {
                     );
                 default:
                     console.log(`Handler for ${locatorParams.length} parameters is not available.Please add it.`)
-
             }
 
         } else {

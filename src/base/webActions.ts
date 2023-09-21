@@ -28,8 +28,7 @@ export class WebActions{
         await this.page.reload();
     }
     async clickElement(locator:string): Promise<void> {
-        console.log(`Locator Clicked: ${locator}`);
-        this.waitForElementToBeClickable(locator);
+        await this.waitForElementToBeClickable(locator);
         await this.page.click(locator,{button:'left'});
     }
     async enterTextOnElement(locator:any,value:any): Promise<any> {
@@ -93,11 +92,11 @@ export class WebActions{
        if(element instance of HTMLElement){
             element.click();
        }`;
-       this.evaluateExpression(functionString);
+       await this.evaluateExpression(functionString);
     }
 
     async getPageTitle(){
-        return this.page.title();
+        return await this.page.title();
     }
     async getElementText(locator:any){
         return (await this.page.locator(locator).textContent()).trim();

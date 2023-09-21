@@ -13,29 +13,30 @@ Then('I {string} is on {string} page',(action:string,pageName:string)=>{
 /*Example:
  * When I "EnterValue" "Shabbir" for "TextField" with values "Username"
  */
-When('I {string} {string} for {string} with values {string}',(action:string,textToBeEnter:string,locatorIdentifier:string,param:string)=>{
-    testExecutor.executeAction({action:action,value:textToBeEnter,locator:testExecutor.getLocator(locatorIdentifier,param)});
+When('I {string} {string} for {string} with values {string}',async (action:string,textToBeEnter:string,locatorIdentifier:string,param:string)=>{
+    testExecutor.executeAction({action:action,value:textToBeEnter,locator:await testExecutor.getLocator(locatorIdentifier,param)});
 });
 
 /*Example:
  * Then I "Click" on "Button" with values "Login"
  */
-When('I {string} on {string} with values {string}',(action:string,locatorIdentifier:string,param:string)=>{
-    testExecutor.executeAction({action:action,locator:testExecutor.getLocator(locatorIdentifier,param)});
+When('I {string} on {string} with values {string}',async (action:string,locatorIdentifier:string,param:string)=>{
+    console.log(`Type of getLocator: ${typeof await testExecutor.getLocator(locatorIdentifier,param)}`);
+    testExecutor.executeAction({action:action,locator:await testExecutor.getLocator(locatorIdentifier,param)});
 });
 
 /*Example:
  * Then I "VerifyElementText" "Shabbir" is displayed in "LocaotrName" with values "ParamOfLocatorIfany"
  */
-Then('I {string} {string} is displayed in {string} with values {string}',(action:string,value:string,locatorIdentifier:string,param:string)=>{
-    testExecutor.executeAction({action:action,locator:testExecutor.getLocator(locatorIdentifier,param),value:value});
+Then('I {string} {string} is displayed in {string} with values {string}',async (action:string,value:string,locatorIdentifier:string,param:string)=>{
+    testExecutor.executeAction({action:action,locator:await testExecutor.getLocator(locatorIdentifier,param),value:value});
 });
 
 /*Example:
  * Then I "VerifyVisibility" is "true" for "LocaotrName" with values "ParamOfLocatorIfany"
  */
-Then('I {string} is {string} for {string} with values {string}',(action:string,value:string,locatorIdentifier:string,param:string)=>{
-    testExecutor.executeAction({action:action,locator:testExecutor.getLocator(locatorIdentifier,param),value:value});
+Then('I {string} is {string} for {string} with values {string}',async (action:string,value:string,locatorIdentifier:string,param:string)=>{
+    testExecutor.executeAction({action:action,locator:await testExecutor.getLocator(locatorIdentifier,param),value:value});
 });
 
 /*Example:
