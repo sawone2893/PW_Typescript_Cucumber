@@ -3,12 +3,6 @@ import {FactoryRegistries} from '../../src/factory/factory_registry'
 
 const testExecutor=FactoryRegistries.testExecutor();
 
-/*Example:
- * Then I "VerifyPageTitle" is on "Login" page
- */
-Then('I {string} is on {string} page',(action:string,pageName:string)=>{
-    testExecutor.executeAction({action:action,value:pageName});
-});
 
 /*Example:
  * When I "EnterValue" "Shabbir" for "TextField" with values "Username"
@@ -41,6 +35,7 @@ Then('I {string} is {string} for {string} with values {string}',async (action:st
 });
 
 /*Example:
+ * Then I "VerifyPageTitle" ""
  * Then I "WaitForPageLoadState" "load"
  */
 Then('I {string} {string}',(action:string,value:string)=>{
