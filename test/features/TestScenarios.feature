@@ -1,9 +1,11 @@
 Feature: Testing Application
     @Test
     Scenario Outline: User Register on the website
-    Given I "WaitUntillElementAppear" on "TagWithText" with values "a,Login or register"
+    Given I "VerifyPageTitle" "<homePageTitle>"
+    Then I "WaitUntillElementAppear" on "TagWithText" with values "a,Login or register"
     When I "Click" on "TagWithText" with values "a,Login or register"
-    And I "Click" on "TagWithAttribute" with values "input,value,register"
+    Then I "WaitUntillElementAppear" on "TagWithText" with values "input,value,register"
+    When I "Click" on "TagWithAttribute" with values "input,value,register"
     And I "Click" on "ButtonWithText" with values "Continue"
     And I "EnterValue" "<firstname>" for "TagWithAttribute" with values "input,name,firstname"
     And I "EnterValue" "<lastname>" for "TagWithAttribute" with values "input,name,lastname"
@@ -24,10 +26,11 @@ Feature: Testing Application
     Then I "VerifyVisibility" is "true" for "TagWithText" with values "span,<accountConfirmationText>"
 
     Examples:
-        | firstname | lastname | email         | address_1 | country | state         | city  | postcode | loginname | password | accountConfirmationText       |
-        | Shabbir   | Rayeen   | abc@gmail.com | ABC Nagar | India   | Uttar Pradesh | Konch | 285205   | Shab2893  | 123456   | Your Account Has Been Created |
+    
+        | homePageTitle                               | firstname | lastname | email         | address_1 | country | state         | city  | postcode | loginname | password | accountConfirmationText       |
+        | A place to practice your automation skills! | Shabbir   | Rayeen   | abc@gmail.com | ABC Nagar | India   | Uttar Pradesh | Konch | 285205   | Shab2893  | 123456   | Your Account Has Been Created |
 
-    @Test
+    @Test1
     Scenario Outline: Verify user is able to place order
     Given I "WaitUntillElementAppear" on "TagWithText" with values "a,Login or register"
     When I "Click" on "TagWithText" with values "a,Login or register"
