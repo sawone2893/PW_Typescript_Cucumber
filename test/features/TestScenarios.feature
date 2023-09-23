@@ -1,5 +1,5 @@
 Feature: Testing Application
-    @Test
+    @smoke
     Scenario Outline: User Register on the website
     Given I "VerifyPageTitle" "<homePageTitle>"
     Then I "WaitUntillElementAppear" on "TagWithText" with values "a,Login or register"

@@ -1,4 +1,5 @@
 const common = `
+test/features/**/*.feature
 --require-module ts-node/register
 --require test.setup.ts
 --require test/stepDefintions/*.ts
@@ -6,7 +7,6 @@ const common = `
 --format summary
 --format progress-bar
 --format @cucumber/pretty-formatter
---format html:reports/report.html
 --publish-quiet
 --exit
 `;

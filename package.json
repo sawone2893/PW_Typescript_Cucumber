@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js test/features/**/*.feature --require-module ts-node/register --require test.setup.ts --require test/step-definitions/**/*.ts",
+    "test":"npx cucumber-js --config=./cucumber.js --tags @smoke",
     "build": "node reporter.js"
   },
   "keywords": [],
