@@ -6,7 +6,7 @@ const common = `
 --format summary
 --format progress-bar
 --format @cucumber/pretty-formatter
---format html:report/report.html
+--format html:reports/report.html
 --publish-quiet
 --exit
 `;
