@@ -5,4 +5,4 @@
 3. Then install required dependencies using the command:
     npm i
 4. Once all the requred dependencies installed then to run test using command:
-    npm run cucumberTest
+    npm run test
