@@ -2,6 +2,7 @@
   "appURL": "https://automationteststore.com/",
   "username": "",
   "password": "",
-  "browserName": "chrome",
+  "browserType":"chromium",
+  "browserChannelName": "chrome",
   "isBrowserModeHeadless": false
 }
