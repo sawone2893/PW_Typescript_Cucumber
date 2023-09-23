@@ -29,7 +29,7 @@ export class TestExecutor {
                 break;
             case 'VerifyVisibility':
                 const isVisible = await global.actionDriver.isElementDisplayed(testStep.locator);
-                global.expect_(isVisible).to.be.equal(testStep.value === 'true');
+                global.expect_(isVisible).to.be.equal(testStep.value === true);
                 break;
             case 'WaitForPageLoadState':
                 await global.actionDriver.waitForPageLoadState(testStep.value);
