@@ -2,6 +2,7 @@
   "appURL": "https://automationteststore.com/",
   "username": "",
   "password": "",
+  "driverName":"playwright",
   "browserType":"chromium",
   "browserChannelName": "chrome",
   "isBrowserModeHeadless": false
