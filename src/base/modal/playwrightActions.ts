@@ -1,7 +1,8 @@
 
 import { Browser, BrowserContext, LaunchOptions, Page, chromium, firefox, webkit } from 'playwright';
+import { IAction } from '../interface/action';
 
-export class PlaywrightActions {
+export class PlaywrightActions implements IAction{
 
     private browserType: string;
     private browser: Browser | null = null;;
@@ -23,9 +24,9 @@ export class PlaywrightActions {
         const launchOptions: LaunchOptions = {
             headless: isHeadless,
             slowMo: 1000,
-            channel: browserChannelName
+            channel: browserChannelName.toLowerCase()
         };
-        switch (this.browserType) {
+        switch ((this.browserType).toLowerCase()) {
             case 'chromium':
                 return await chromium.launch(launchOptions);
             case 'firefox':
