@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test":"npx cucumber-js --config=./cucumber.js --tags @smoke",
+    "test": "npx cucumber-js --config=./cucumber.js --tags @smoke",
     "build": "node reporter.js"
   },
   "keywords": [],
@@ -21,7 +21,7 @@
     "cucumber": "^6.0.7",
     "cucumber-html-reporter": "^7.1.1",
     "path": "^0.12.7",
-    "playwright": "^1.36.2",
+    "playwright": "^1.38.1",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.6"

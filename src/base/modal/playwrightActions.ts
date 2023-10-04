@@ -16,8 +16,8 @@ export class PlaywrightActions implements IAction{
     async initialize(browserChannelName: any, isHeadless: any) {
         this.browser = await this.launchBrowser(browserChannelName, isHeadless);
         this.context = await this.browser.newContext({ ignoreHTTPSErrors: true, acceptDownloads: true })
-        this.page = await this.browser.newPage();
-        this.context.setDefaultTimeout(110000);
+        this.page = await this.context.newPage();
+        //this.context.setDefaultTimeout(110000);
     }
 
     async launchBrowser(browserChannelName: any, isHeadless: any): Promise<Browser> {
@@ -91,7 +91,7 @@ export class PlaywrightActions implements IAction{
     async waitUntillElementAppear(locator: any, timeInSeconds: number): Promise<any> {
         try {
             const startTime = Date.now();
-            while (!await this.isElementDisplayed(locator)) {
+            while (!(await this.isElementDisplayed(locator))) {
                 console.log(`Waiting for Element[${locator}] to be appear...`);
                 await this.waitForPageLoadState("networkidle");
                 await this.waitForPageLoadState("load");
@@ -186,5 +186,30 @@ export class PlaywrightActions implements IAction{
 
         }
 
+    }
+
+    async isElementPresent(locator: any){
+        let status=false;
+        if((await this.page.$$(locator)).length>0){
+            if(this.isElementDisplayed(locator)){
+                status=true;
+            }else{
+                status=false;
+            }
+
+        }else{
+            status=false;
+        }
+        return status;
+    }
+
+    async scrollIntoView(locator: any) {
+        if(await this.isElementPresent(locator)){
+            let element = this.page.locator(locator);
+            element.scrollIntoViewIfNeeded()
+        }else{
+            console.log(`Unable to perfomr scroll as Web element:[${locator}] is not present`);
+        }
+        
     }
 }

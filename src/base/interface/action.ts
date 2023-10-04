@@ -17,5 +17,7 @@ interface IAction{
     evaluateExpression(expression:string):Promise<void|any>;
     takeScreenshot(options:any,screnshotType:any,elementLocator?:any):Promise<void|any>;
     jsClick(locator:any):Promise<void|any>;
+    scrollIntoView(locator:any):Promise<void>;
+    isElementPresent(locator: any):Promise<any>;
 }
 export {IAction}

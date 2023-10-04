@@ -37,7 +37,9 @@ export class TestExecutor {
             case 'WaitForElement':
                 await global.actionDriver.waitForElement(Number(testStep.value));
                 break;
-                  
+            case 'ScrollToView':
+                await global.actionDriver.scrollIntoView(testStep.locator);
+                break;    
             default:
                 console.log(`${testStep.action} is not defined.Please define your action in the TestExecutor Class.`)
         }
